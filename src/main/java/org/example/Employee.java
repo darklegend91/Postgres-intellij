@@ -1,22 +1,21 @@
 package org.example;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "employee")
 public class Employee {
+
     @Id
     private int eID;
+
     private String eName;
+
     private long ePhone;
 
-    public String getClause() {
-        return eName;
-    }
-
-    public void seteName(String clause) {
-        this.eName = clause;
-    }
+    @OneToMany(mappedBy = "emp", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Department> department;
 
     public int geteID() {
         return eID;
@@ -24,6 +23,14 @@ public class Employee {
 
     public void seteID(int eID) {
         this.eID = eID;
+    }
+
+    public String geteName() {
+        return eName;
+    }
+
+    public void seteName(String eName) {
+        this.eName = eName;
     }
 
     public long getePhone() {
@@ -34,15 +41,11 @@ public class Employee {
         this.ePhone = ePhone;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "eID=" + eID +
-                ", clause='" + eName + '\'' +
-                ", ePhone=" + ePhone +
-                '}';
+    public List<Department> getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(List<Department> department) {
+        this.department = department;
     }
 }
-
-
-
