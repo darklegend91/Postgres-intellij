@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+
         Employee e1 = new Employee();
         e1.seteID(101);
         e1.seteName("Akshit");
@@ -27,18 +28,24 @@ public class Main {
         Department d1 = new Department();
         d1.setdName("Sales");
         d1.setDtId(201);
-        //d1.setEmp(e1);
 
         Department d2 = new Department();
         d2.setdName("HR");
         d2.setDtId(202);
+
+        //One to Many
+        //d1.setEmp(e1);
         //d2.setEmp(e1);
+
+        // set relationships (both sides)
         d1.setEmp(Arrays.asList(e1, e2));
+        d2.setEmp(Arrays.asList(e2));
 
-        // Add departments to employee
         e1.setDepartment(Arrays.asList(d1, d2));
+        e2.setDepartment(Arrays.asList(d1, d2));
+        e3.setDepartment(Arrays.asList(d2));
 
-        // Hibernate setup
+        //SetUp Hibernate
         Configuration cfg = new Configuration();
         cfg.addAnnotatedClass(Employee.class);
         cfg.addAnnotatedClass(Department.class);
@@ -48,12 +55,14 @@ public class Main {
         Session session = sf.openSession();
         Transaction t1 = session.beginTransaction();
 
+        //Session Persist
         session.persist(e1);
         session.persist(e2);
         session.persist(e3);
         session.persist(d1);
         session.persist(d2);
 
+        //Commit Changes to PgAdmin or Postgres
         t1.commit();
         session.close();
         sf.close();
