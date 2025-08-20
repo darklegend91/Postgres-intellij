@@ -14,7 +14,8 @@ public class Employee {
 
     private long ePhone;
 
-    @OneToMany(mappedBy = "emp", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "emp", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(mappedBy = "emp", cascade = CascadeType.ALL)
     private List<Department> department;
 
     public int geteID() {

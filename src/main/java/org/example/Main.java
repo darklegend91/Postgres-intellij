@@ -14,15 +14,26 @@ public class Main {
         e1.seteName("Akshit");
         e1.setePhone(123456789);
 
+        Employee e2 = new Employee();
+        e2.seteID(102);
+        e2.seteName("Emp2");
+        e2.setePhone(981234567);
+
+        Employee e3 = new Employee();
+        e3.seteID(103);
+        e3.seteName("Emp3");
+        e3.setePhone(984561237);
+
         Department d1 = new Department();
         d1.setdName("Sales");
         d1.setDtId(201);
-        d1.setEmp(e1);
+        //d1.setEmp(e1);
 
         Department d2 = new Department();
         d2.setdName("HR");
         d2.setDtId(202);
-        d2.setEmp(e1);
+        //d2.setEmp(e1);
+        d1.setEmp(Arrays.asList(e1, e2));
 
         // Add departments to employee
         e1.setDepartment(Arrays.asList(d1, d2));
@@ -37,7 +48,11 @@ public class Main {
         Session session = sf.openSession();
         Transaction t1 = session.beginTransaction();
 
-        session.persist(e1);  // CascadeType.ALL will save departments too
+        session.persist(e1);
+        session.persist(e2);
+        session.persist(e3);
+        session.persist(d1);
+        session.persist(d2);
 
         t1.commit();
         session.close();

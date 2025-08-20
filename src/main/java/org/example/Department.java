@@ -2,6 +2,8 @@ package org.example;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "department")
 public class Department {
@@ -12,9 +14,10 @@ public class Department {
     private String dName;
 
     // Many departments can belong to one Employee
-    @ManyToOne
-    @JoinColumn(name = "emp_id") // foreign key in department table
-    private Employee emp;
+    //@ManyToOne
+    @ManyToMany
+//    @JoinColumn(name = "emp_id") // foreign key in department table
+    private List<Employee> emp;
 
     public int getDtId() {
         return dtId;
@@ -32,11 +35,11 @@ public class Department {
         this.dName = dName;
     }
 
-    public Employee getEmp() {
+    public List<Employee> getEmp() {
         return emp;
     }
 
-    public void setEmp(Employee emp) {
+    public void setEmp(List<Employee> emp) {
         this.emp = emp;
     }
 }
