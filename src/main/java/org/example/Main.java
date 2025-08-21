@@ -57,6 +57,7 @@ public class Main {
 
         //Session Persist
         session.persist(e1);
+        session.persist(e1);
         session.persist(e2);
         session.persist(e3);
         session.persist(d1);
